@@ -1,17 +1,25 @@
 const puppeteer = require("puppeteer");
-const ExcelJS = require("exceljs"); // Import the exceljs library
+const ExcelJS = require("exceljs");
 const constant = require("./constants")
 
 async function scrapeReviews(url, i, worksheet) {
-  if (i == 5) {
+  if (i == 4) {
+    console.log("Scrapping Completed")
     return;
   }
   try {
     const browser = await puppeteer.launch({
       headless: false,
     });
-    const page = (await browser.pages())[0];
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36');
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 600000 });
+    const searchText = "Enter the characters you see below";
+    const content = await page.content();
+    if(content.includes(searchText))
+    {
+      await page.waitForNavigation();
+    }
     const url1 = await page.evaluate(() => window.location.href);
     if (url1.includes("signin")) {
       await page.type("#ap_email",constant.email);
@@ -42,9 +50,12 @@ async function scrapeReviews(url, i, worksheet) {
   }
 }
 
-module.exports.scrapper = async function (url, i) {
+module.exports.scrapper = async function (url, i,descriptions) {
   const workbook = new ExcelJS.Workbook(); 
   const worksheet = workbook.addWorksheet(`Page ${i}`);
+  descriptions.forEach(element => {
+    worksheet.addRow([element]);
+  });
   await scrapeReviews(url, i || 1, worksheet);
   await workbook.xlsx.writeFile("reviews.xlsx");
 };

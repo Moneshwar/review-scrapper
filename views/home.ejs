@@ -2,23 +2,76 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Review scrapper</title>
+    <title>Review Scraper</title>
     <link rel="icon" href="images/favicon.png" />
-    <link rel="stylesheet" href="styles/styles.css" />
+    <style>
+      body {
+        background-color: #f7f7f7;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      .header {
+        background-color: #3498db;
+        padding: 20px;
+        color: #fff;
+      }
+
+      .logo {
+        font-size: 24px;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      form {
+        margin: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        margin-bottom: 25px;
+        margin-top: 25px;
+        color: #333;
+      }
+
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .btn {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .btn:hover {
+        background-color: #2e86c1;
+      }
+    </style>
   </head>
   <body>
     <div class="header">
-      <a href="" class="logo">Review Scrapper</a>
+      <a href="" class="logo">Review Scraper</a>
     </div>
     <form action="/" method="post">
-      <label
-        ><h2 style="margin-bottom: 25px; margin-top: 25px">
-          Enter the product url To scrap reviews:
-        </h2></label
-      >
-      <textarea name="enteredItem" rows="2" cols="90"></textarea>
+      <label>
+        <h2>Enter the product URL to scrape reviews:</h2>
+      </label>
+      <textarea name="enteredItem" rows="4" cols="90"></textarea>
       <button class="btn" type="submit" name="button" value="val">
-        Start scrapping
+        Start Scraping
       </button>
     </form>
   </body>
